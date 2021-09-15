@@ -49,3 +49,10 @@
     </div>
 </section>
 @endsection
+@section('extended_js')
+<script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+@endsection
