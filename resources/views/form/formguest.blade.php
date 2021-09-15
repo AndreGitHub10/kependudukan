@@ -10,7 +10,7 @@
 	        </div>
 	        <div class="card-content">
 	            <div class="card-body">
-	                <form class="form form-horizontal" method="post" action="{{ route('store') }}" enctype="multipart/form-data" name="kirim">
+	                <form class="form form-horizontal" method="post" action="{{ route('storeGuest') }}" enctype="multipart/form-data" name="kirim">
 	                	@csrf
 	                    <div class="form-body">
 	                        <div class="row">

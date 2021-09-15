@@ -41,7 +41,7 @@ Route::middleware(['rt'])->group(function () {
 });
 
 Route::middleware(['guest'])->group(function () {
-	Route::post('/storeGuest', [WargaController::class, 'storeGuest'])->name('store');
+	Route::post('/storeGuest', [WargaController::class, 'storeGuest'])->name('storeGuest');
 });
 
 
