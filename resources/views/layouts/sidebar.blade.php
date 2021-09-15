@@ -14,16 +14,16 @@
 					<div class="sidebar-title">
 						<h1>Menu</h1>
 					</div>
-					@if($role == 2)
+					@if($role == 2 || $role == 1)
 						<li class="sidebar-item">
-							<a href="{{ route('wargart') }}" class="sidebar-link">
+							<a href="{{ route('wargarw') }}" class="sidebar-link">
 								<span>{{ $role == 1 ? 'Data RW' : 'Data Warga RT' }}</span>
 							</a>
 						</li>
 					@endif
-					@if($role == 3)
+					@if($role == 3  || $role == 1)
 						<li class="sidebar-item">
-							<a href="{{ route('warga') }}" class="sidebar-link">
+							<a href="{{ route('wargart') }}" class="sidebar-link">
 								<span>{{ $role == 1 ? 'Data RT' : 'Data Warga' }}</span>
 							</a>
 						</li>

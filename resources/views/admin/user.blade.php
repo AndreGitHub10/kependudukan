@@ -1,39 +1,35 @@
 @extends('layouts.app')
+
 @section('content')
 <section class="section">
-    <div class="card overflow-auto">
+    <div class="card overflow-auto">       
         <div class="card-header">
-        Data Penduduk
+        <h4>{{ "Login User" }}</h4>
         </div>
         <div class="card-body">
-            <a href="{{ route('create') }}">
-                <button type="button" class="btn btn-primary mb-1">Tambah Data</button>
+            <a href="{{ route('user.create') }}">
+                <button type="button" class="btn btn-primary mb-1">Tambah User</button>
             </a>
             <table class="table table-striped table-hover" id="table1">
                 <thead>
                     <tr>
-                        <th>Nik</th>
                         <th>Nama</th>
-                        <th>Tempat Lahir</th>
-                        <th>Tanggal Lahir</th>
+                        <th>Email</th>
                         <th>Kontak</th>
-                        <th>Rw</th>
-                        <th>Rt</th>
+                        <th>RT</th>
+                        <th>RW</th>
                         <th>Aksi</th>
                     </tr>    
                 </thead>
-                <tbody>
-                    @foreach ($warga as $wargas)
+                @foreach ($user as $users)
                     <tr>
-                        <td>{{ $wargas->nik }}</td>
-                        <td>{{ $wargas->nama }}</td>
-                        <td>{{ $wargas->tempat_lahir }}</td>
-                        <td>{{ $wargas->tanggal_lahir }}</td>
-                        <td>{{ $wargas->kontak }}</td>
-                        <td>{{ $wargas->rw }}</td>
-                        <td>{{ $wargas->rt }}</td>
+                        <td>{{ $users->name }}</td>
+                        <td>{{ $users->email }}</td>
+                        <td>{{ $users->kontak }}</td>
+                        <td>{{ $users->rw }}</td>
+                        <td>{{ $users->rt }}</td>
                         <td>
-                            <form method="POST" action="{{ route('warga.destroy', ['warga' => $wargas->id]) }}">
+                            <form method="POST" action="{{ route('user.destroy', $users->id) }}">
                             @method('DELETE')
                             @csrf
                             
@@ -45,9 +41,9 @@
                         </td> -->
                     </tr>
                     @endforeach
-                </tbody>
             </table>
         </div>
     </div>
 </section>
+
 @endsection

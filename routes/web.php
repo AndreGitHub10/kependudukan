@@ -28,12 +28,13 @@ Route::middleware(['admin'])->group(function () {
 });
 
 Route::middleware(['rw'])->group(function () {
-	Route::get('wargart', [RtController::class, 'index'])->name('wargart');
+	Route::resource('warga', WargaController::class);
+	Route::get('wargarw', [WargaController::class, 'index'])->name('wargarw');
 });
 
 Route::middleware(['rt'])->group(function () {
 	Route::resource('warga', WargaController::class);
-	Route::get('warga', [WargaController::class, 'index'])->name('warga');
+	Route::get('wargart', [RtController::class, 'index'])->name('wargart');
 	Route::get('/create', [WargaController::class, 'create'])->name('create');
 	Route::get('/show', [WargaController::class, 'show'])->name('show');
 	Route::post('/store', [WargaController::class, 'store'])->name('store');

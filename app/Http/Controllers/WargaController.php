@@ -16,7 +16,7 @@ class WargaController extends Controller
     public function index()
     {
         $warga = Warga::all();
-        return view('rt.rt', ['warga' => $warga]);
+        return view('rw.rw', ['warga' => $warga]);
     }
 
     /**
@@ -46,6 +46,7 @@ class WargaController extends Controller
         // Warga::create($request->all());
         $warga = new Warga;
         $warga->nik = $request->nik;
+        $warga->kk = $request->kk;
         $warga->nama = $request->nama;
         $warga->tempat_lahir = $request->tempat_lahir;
         $warga->tanggal_lahir = $request->tanggal_lahir;

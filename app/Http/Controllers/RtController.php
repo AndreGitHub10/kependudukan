@@ -16,8 +16,8 @@ class RtController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        $warga = Warga::all()->where('rw', $user->rw);
-        return view('rw.rw', ['warga' => $warga]);
+        $warga = Warga::all()->where('rt', $user->rt);
+        return view('rt.rt', ['warga' => $warga]);
     }
 
     /**
