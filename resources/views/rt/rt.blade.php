@@ -13,7 +13,8 @@
             <table class="table table-striped table-hover" id="table1">
                 <thead>
                     <tr>
-                        <th>Nik</th>
+                        <th>NIK</th>
+                        <th>KK</th>
                         <th>Nama</th>
                         <th>Tempat Lahir</th>
                         <th>Tanggal Lahir</th>
@@ -27,6 +28,7 @@
                     @foreach ($warga as $wargas)
                     <tr>
                         <td>{{ $wargas->nik }}</td>
+                        <td>{{ $wargas->kk }}</td>
                         <td>{{ $wargas->nama }}</td>
                         <td>{{ $wargas->tempat_lahir }}</td>
                         <td>{{ $wargas->tanggal_lahir }}</td>
