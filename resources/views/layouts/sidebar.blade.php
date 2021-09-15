@@ -23,7 +23,7 @@
 					@endif
 					@if($role == 3  || $role == 1)
 						<li class="sidebar-item">
-							<a href="{{ route('wargart') }}" class="sidebar-link">
+							<a href="{{ route('warga') }}" class="sidebar-link">
 								<span>{{ $role == 1 ? 'Data RT' : 'Data Warga' }}</span>
 							</a>
 						</li>

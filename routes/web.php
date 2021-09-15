@@ -23,8 +23,8 @@ Route::get('/', function () {
 
 Route::middleware(['admin'])->group(function () {
 	Route::resource('user', UserController::class);
-	Route::get('wargart', [RtController::class, 'index'])->name('wargart');
-	Route::get('warga', [WargaController::class, 'index'])->name('warga');
+	Route::get('warga', [RtController::class, 'index'])->name('warga');
+	Route::get('wargarw', [WargaController::class, 'index'])->name('wargarw');
 });
 
 Route::middleware(['rw'])->group(function () {
