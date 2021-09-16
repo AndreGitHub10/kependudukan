@@ -15,14 +15,14 @@ class CreateWargaTable extends Migration
     {
         Schema::create('warga', function (Blueprint $table) {
             $table->id();
-            $table->integer('nik');
-            $table->integer('kk');
+            $table->string('nik');
+            $table->string('kk');
             $table->string('nama');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
-            $table->integer('kontak');
-            $table->integer('rt');
-            $table->integer('rw');
+            $table->string('kontak');
+            $table->string('rt');
+            $table->string('rw');
             $table->timestamps();
         });
     }
