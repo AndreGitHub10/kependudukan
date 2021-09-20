@@ -7,15 +7,15 @@
         <h4>{{ "Data Penduduk RT $user->rt / RW $user->rw" }}</h4>
         </div>
         <div class="card-body">
-            <a href="{{ route('create') }}">
+            <a href="{{ route('rt.create') }}">
                 <button type="button" class="btn btn-primary mb-1">Tambah Data</button>
             </a>
             <table class="table table-striped table-hover" id="table1">
                 <thead>
                     <tr>
-                        <th>NIK</th>
-                        <th>KK</th>
+                        <th>No.</th>
                         <th>Nama</th>
+                        <th>Alamat</th>
                         <th>Tempat Lahir</th>
                         <th>Tanggal Lahir</th>
                         <th>Kontak</th>
@@ -27,25 +27,50 @@
                 <tbody>
                     @foreach ($warga as $wargas)
                     <tr>
-                        <td>{{ $wargas->nik }}</td>
-                        <td>{{ $wargas->kk }}</td>
+                        <td class="text-center">{{ ++$i }}</td>
                         <td>{{ $wargas->nama }}</td>
+                        <td>{{ $wargas->alamat }}</td>
                         <td>{{ $wargas->tempat_lahir }}</td>
                         <td>{{ $wargas->tanggal_lahir }}</td>
                         <td>{{ $wargas->kontak }}</td>
                         <td>{{ $wargas->rw }}</td>
                         <td>{{ $wargas->rt }}</td>
                         <td>
-                            <form method="POST" action="{{ route('warga.destroy', ['warga' => $wargas->id]) }}">
-                            @method('DELETE')
+                            <a href="{{ route('rt.edit',$wargas->id) }}"><button class="btn btn-warning" type="submit"><i class="fa fa-info-circle"></i>&nbsp;Edit</button></a>
+                            <form method="POST" action="{{ route('rt.destroy', $wargas->id) }}" name="hapus">
                             @csrf
-                            
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-info-circle"></i>&nbsp;Hapus</button>
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit" onclick="return confirm('Apakan anda ingin menghapus data {{ $wargas->nama }}?')"><i class="fa fa-info-circle"></i>&nbsp;Hapus</button>
+                                <!-- <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                    <div class="modal-dialog " role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="myModalLabel1">Konfirmasi</h5>
+                                                <button type="button" class="close rounded-pill"
+                                                    data-bs-dismiss="modal" aria-label="Close">
+                                                    <i data-feather="x"></i>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                    Hapus Data?
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn" data-bs-dismiss="modal">
+                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Batal</span>
+                                                </button>
+                                                <button type="submit" class="btn btn-primary ml-1" data-bs-dismiss="modal" onclick="document.hapus.submit()">
+                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Hapus</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
                             </form>
                         </td>
-                        <!-- <td>
-                            <span class="badge bg-success">Active</span>
-                        </td> -->
                     </tr>
                     @endforeach
                 </tbody>

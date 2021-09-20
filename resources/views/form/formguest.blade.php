@@ -18,25 +18,28 @@
 	                                <label>Nama</label>
 	                            </div>
 	                            <div class="col-md-9 form-group">
-	                                <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama">
+	                                <input type="text" id="nama" class="@error('nama') is-invalid @enderror form-control" name="nama" placeholder="Nama">
+	                                @error('nama')
+									    <span class="help-block">{{ $message }}</span>
+									@enderror
 	                            </div>
 	                            <div class="col-md-3">
-	                                <label>NIK</label>
+	                                <label>Alamat</label>
 	                            </div>
 	                            <div class="col-md-9 form-group">
-	                                <input type="text" inputmode="numeric" id="nik" class="form-control" name="nik" placeholder="NIK" maxlength="16" minlength="16">
-	                            </div>
-	                            <div class="col-md-3">
-	                                <label>Nomor KK</label>
-	                            </div>
-	                            <div class="col-md-9 form-group">
-	                                <input type="text" inputmode="numeric" id="kk" class="form-control" name="kk" placeholder="Nomor KK" maxlength="16" minlength="16">
+	                                <input type="text" id="alamat" class="@error('alamat') is-invalid @enderror form-control" name="alamat" placeholder="Blok / Nomor Rumah">
+	                                @error('alamat')
+								    <span class="help-block">{{ $message }}</span>
+									@enderror
 	                            </div>
 	                            <div class="col-md-3">
 	                                <label>Tempat dan Tanggal Lahir</label>
 	                            </div>
 	                            <div class="col-md-5 form-group">
-	                                <input type="text" id="tempat" class="form-control" name="tempat_lahir" placeholder="Tempat lahir">
+	                                <input type="text" id="tempat" class="@error('tempat_lahir') is-invalid @enderror form-control" name="tempat_lahir" placeholder="Tempat lahir">
+	                                @error('tempat_lahir')
+									    <span class="help-block">{{ $message }}</span>
+									@enderror
 	                            </div>
 	                            <div class="col-md-4 form-group">
 		                            <div class="input-group">
@@ -46,8 +49,11 @@
 												<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
 											</svg>
 		                            	</label>
-		                            	<input type="date" name="tanggal_lahir" class="form-control">
+		                            	<input type="date" name="tanggal_lahir" class="@error('tanggal_lahir') is-invalid @enderror form-control">
 		                            </div>
+		                            @error('tanggal_lahir')
+									    <span class="help-block">{{ $message }}</span>
+									@enderror
 	                            </div>
 	                            <div class="col-md-3">
 	                                <label>Nomor HP</label>

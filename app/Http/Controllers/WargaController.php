@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class WargaController extends Controller
 {
@@ -16,7 +17,7 @@ class WargaController extends Controller
     public function index()
     {
         $warga = Warga::all();
-        return view('rw.rw', ['warga' => $warga]);
+        return view('table', compact('warga'))->with('i', (request()->input('page', 1) - 1));
     }
 
     /**
@@ -26,7 +27,8 @@ class WargaController extends Controller
      */
     public function create(Request $request)
     {
-        return view('form/form');
+        $warga = new Warga;
+        return view('form/form', ['warga' => $warga]);
     }
 
     /**
@@ -38,16 +40,22 @@ class WargaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nik' => 'required|numeric|digits:16',
             'nama' => 'required',
+            'alamat' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+        ], [
+            'nama.required' => 'Nama harus diisi.',
+            'alamat.required' => 'Alamat harus diisi.',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
         ]);
         // Warga::create($request->all());
         $warga = new Warga;
-        $warga->nik = $request->nik;
-        $warga->kk = $request->kk;
+        // $warga->nik = $request->nik;
+        // $warga->kk = $request->kk;
         $warga->nama = $request->nama;
+        $warga->alamat = $request->alamat;
         $warga->tempat_lahir = $request->tempat_lahir;
         $warga->tanggal_lahir = $request->tanggal_lahir;
         $warga->kontak = $request->kontak;
@@ -55,7 +63,7 @@ class WargaController extends Controller
         $warga->rw = $request->rw;
         $warga->save();
         $warga1 = Warga::all();
-        return redirect()->route('warga');
+        return redirect()->route('warga.index');
     }
 
     /**
@@ -76,9 +84,10 @@ class WargaController extends Controller
      * @param  \App\Models\Warga  $warga
      * @return \Illuminate\Http\Response
      */
-    public function edit(Warga $warga)
+    public function edit($id)
     {
-        return view('update');
+        $warga = Warga::find($id);
+        return view('form.form', compact('warga'));
     }
 
     /**
@@ -88,9 +97,29 @@ class WargaController extends Controller
      * @param  \App\Models\Warga  $warga
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Warga $warga)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+        ], [
+            'nama.required' => 'Nama harus diisi.',
+            'alamat.required' => 'Alamat harus diisi.',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
+        ]);
+        $wargaUpdate = Warga::find($id);
+        $wargaUpdate->nama = $request->nama;
+        $wargaUpdate->alamat = $request->alamat;
+        $wargaUpdate->tempat_lahir = $request->tempat_lahir;
+        $wargaUpdate->tanggal_lahir = $request->tanggal_lahir;
+        $wargaUpdate->kontak = $request->kontak;
+        $wargaUpdate->rt = $request->rt;
+        $wargaUpdate->rw = $request->rw;
+        $wargaUpdate->save();
+        return redirect()->route('rt.index');
     }
 
     /**
@@ -102,17 +131,21 @@ class WargaController extends Controller
     public function destroy(Warga $warga)
     {
         $warga->delete();
-        $warga2 = Warga::all();
-        return view('table', ['warga' => $warga2]);
+        return redirect()->route('warga.index');
     }
 
     public function storeGuest(Request $request)
     {
         $request->validate([
-            'nik' => 'required|numeric|digits:16',
             'nama' => 'required',
+            'alamat' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+        ], [
+            'nama.required' => 'Nama harus diisi.',
+            'alamat.required' => 'Alamat harus diisi.',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi.',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi.',
         ]);
         // Warga::create($request->all());
         $warga = new Warga;
@@ -125,6 +158,8 @@ class WargaController extends Controller
         $warga->rt = $request->rt;
         $warga->rw = $request->rw;
         $warga->save();
-        return view('form/formguest');
+        $request->session()->flash('alert-success', 'User was successful added!');
+        return redirect()->route('welcome');
+        // return view('form/formguest');
     }
 }

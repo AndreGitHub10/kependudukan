@@ -6,38 +6,40 @@
         Data Penduduk
         </div>
         <div class="card-body">
-            <a href="{{ route('create') }}">
+            <a href="{{ route('warga.create') }}">
                 <button type="button" class="btn btn-primary mb-1">Tambah Data</button>
             </a>
             <table class="table table-striped table-hover" id="table1">
                 <thead>
                     <tr>
-                        <th>Nik</th>
+                        <th>No.</th>
                         <th>Nama</th>
+                        <th>Alamat</th>
                         <th>Tempat Lahir</th>
                         <th>Tanggal Lahir</th>
                         <th>Kontak</th>
-                        <th>Rw</th>
-                        <th>Rt</th>
+                        <th>RW</th>
+                        <th>RT</th>
                         <th>Aksi</th>
                     </tr>    
                 </thead>
                 <tbody>
                     @foreach ($warga as $wargas)
                     <tr>
-                        <td>{{ $wargas->nik }}</td>
+                        <td>{{ ++$i }}</td>
                         <td>{{ $wargas->nama }}</td>
+                        <td>{{ $wargas->alamat }}</td>
                         <td>{{ $wargas->tempat_lahir }}</td>
                         <td>{{ $wargas->tanggal_lahir }}</td>
                         <td>{{ $wargas->kontak }}</td>
                         <td>{{ $wargas->rw }}</td>
                         <td>{{ $wargas->rt }}</td>
                         <td>
-                            <form method="POST" action="{{ route('warga.destroy', ['warga' => $wargas->id]) }}">
+                            <form method="POST" action="{{ route('warga.destroy', $wargas->id) }}">
                             @method('DELETE')
                             @csrf
                             
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-info-circle"></i>&nbsp;Hapus</button>
+                            <button class="btn btn-danger" type="submit"><i class="fa fa-info-circle"></i>&nbsp;Hapus</button>
                             </form>
                         </td>
                         <!-- <td>

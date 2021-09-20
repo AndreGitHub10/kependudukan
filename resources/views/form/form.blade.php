@@ -8,12 +8,20 @@
 	    	@php($rw = $user->rw)
 	    	@php($rt = $user->rt)
 	        <div class="card-header">
+	        	@if($warga->id == '')
 	            <h4 class="card-title">Data Diri {{ "Penduduk RT $rt / RW $rw" }} 
 	           	</h4>
+	           	@else
+	           	<h4 class="card-title">Update Penduduk {{ "$warga->nama" }} 
+	           	</h4>
+	           	@endif
 	        </div>
 	        <div class="card-content">
 	            <div class="card-body">
-	                <form class="form form-horizontal" method="post" action="{{ route('store') }}" enctype="multipart/form-data" name="kirim">
+	                <form class="form form-horizontal" method="post" action="@if($warga->id != ''){{ route('rt.update', $warga->id) }}@else{{ route('rt.store') }}@endif" enctype="multipart/form-data" name="kirim">
+	                	@if($warga->id != '')
+	                	@method('PUT')
+	                	@endif
 	                	@csrf
 	                    <div class="form-body">
 	                        <div class="row">
@@ -21,25 +29,28 @@
 	                                <label>Nama</label>
 	                            </div>
 	                            <div class="col-md-9 form-group">
-	                                <input type="text" id="nama" class="form-control" name="nama" placeholder="Nama">
+	                                <input type="text" id="nama" class="@error('nama') is-invalid @enderror form-control" name="nama" placeholder="Nama" value="@if($warga != ''){{ $warga->nama }}@endif">
+	                                @error('nama')
+									    <span class="help-block">{{ $message }}</span>
+									@enderror
 	                            </div>
 	                            <div class="col-md-3">
-	                                <label>NIK</label>
+	                                <label>Alamat</label>
 	                            </div>
 	                            <div class="col-md-9 form-group">
-	                                <input type="text" inputmode="numeric" id="nik" class="form-control" name="nik" placeholder="NIK" maxlength="16" minlength="16">
-	                            </div>
-	                            <div class="col-md-3">
-	                                <label>Nomor KK</label>
-	                            </div>
-	                            <div class="col-md-9 form-group">
-	                                <input type="text" id="kk" class="form-control" name="kk" placeholder="Nomor KK" maxlength="16" minlength="16">
+	                                <input type="text" id="alamat" class="@error('alamat') is-invalid @enderror form-control" name="alamat" placeholder="Blok / Nomor Rumah">
+	                                @error('alamat')
+								    <span class="help-block">{{ $message }}</span>
+									@enderror
 	                            </div>
 	                            <div class="col-md-3">
 	                                <label>Tempat dan Tanggal Lahir</label>
 	                            </div>
 	                            <div class="col-md-5 form-group">
-	                                <input type="text" id="tempat" class="form-control" name="tempat_lahir" placeholder="Tempat lahir">
+	                                <input type="text" id="tempat" class="@error('tempat_lahir') is-invalid @enderror form-control" name="tempat_lahir" placeholder="Tempat lahir" value="@if($warga != ''){{ $warga->tempat_lahir }}@endif">
+	                                @error('tempat_lahir')
+									    <span class="help-block">{{ $message }}</span>
+									@enderror
 	                            </div>
 	                            <div class="col-md-4 form-group">
 		                            <div class="input-group">
@@ -49,15 +60,18 @@
 												<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
 											</svg>
 		                            	</label>
-		                            	<input type="date" name="tanggal_lahir" class="form-control">
+		                            	<input type="date" name="tanggal_lahir" class="@error('tanggal_lahir') is-invalid @enderror form-control" value="@if($warga != ''){{ $warga->tanggal_lahir }}@endif">
 		                            </div>
+		                            @error('tanggal_lahir')
+									    <span class="help-block">{{ $message }}</span>
+									@enderror
 	                            </div>
 	                            <div class="col-md-3">
 	                                <label>Nomor HP</label>
 	                            </div>
 	                            <div class="col-md-9 form-group">
 	                                <input type="text" id="kontak" class="form-control"
-	                                    name="kontak" placeholder="Nomor HP">
+	                                    name="kontak" placeholder="Nomor HP" value="@if($warga != ''){{ $warga->kontak }}@endif">
 	                            </div>
 	                            <div class="col-md-3">
 	                                <label>RT/RW</label>
@@ -65,8 +79,16 @@
 	                            <fieldset class="col-md-4 form-group">
 	                            	<div class="input-group">
 	                            		<label class="input-group-text" for="rt">RT</label>
-										<select class="form-select" id="rt" name="rt">				
+										<select class="form-select" id="rt" name="rt">	
+											@if($user->role == 1)
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+											@else
 											<option value="{{$rt}}">{{$rt}}</option>
+											@endif
 										</select>
 	                            	</div>
 	                            </fieldset>
@@ -74,11 +96,21 @@
 	                            	<div class="input-group">
 		                            	<label class="input-group-text" for="rw">RW</label>
 										<select class="form-select" id="rw" name="rw">
-											<option value="{{$rw}}">{{$rw}}</option>
+											@if($user->role == 1)
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+											@else
+											<option value="{{$rt}}">{{$rt}}</option>
+											@endif
 										</select>
 									</div>
 								</fieldset>
 	                            <div class="col-sm-12 d-flex justify-content-end">
+	                            	<a href="{{ route('rt.index') }}">
+	                            	<button type="button" class="btn btn-default me-1 mb-1">Batal</button></a>
 	                                <button type="button" class="btn btn-primary me-1 mb-1" data-bs-toggle="modal" data-bs-target="#default">Simpan</button>
 	                                <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                                         <div class="modal-dialog " role="document">

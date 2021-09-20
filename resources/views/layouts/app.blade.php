@@ -48,6 +48,14 @@
 <body>
     <div class="wrapper">
         @include('layouts.navbar')
+        <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+
+                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            @endif
+            @endforeach
+        </div>
         @guest
             @if (Route::has('login'))
             <div class="container pt-5">

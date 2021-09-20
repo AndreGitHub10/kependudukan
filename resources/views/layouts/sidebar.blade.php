@@ -16,14 +16,14 @@
 					</div>
 					@if($role == 2 || $role == 1)
 						<li class="sidebar-item">
-							<a href="{{ route('wargarw') }}" class="sidebar-link">
+							<a href="@if($role == 1){{ route('warga.index') }}@else{{ route('rw.index') }}@endif" class="sidebar-link">
 								<span>{{ $role == 1 ? 'Data Warga' : 'Data RW' }}</span>
 							</a>
 						</li>
 					@endif
 					@if($role == 3)
 						<li class="sidebar-item">
-							<a href="{{ route('warga') }}" class="sidebar-link">
+							<a href="{{ route('rt.index') }}" class="sidebar-link">
 								<span>{{ 'Data RT' }}</span>
 							</a>
 						</li>
@@ -31,7 +31,7 @@
 					@if( $role == 1)
 						<li class="sidebar-item">
 							<a href="{{ route('user.index') }}" class="sidebar-link">
-								<span>Login User</span>
+								<span>Data User RT/RW</span>
 							</a>
 						</li>
 					@endif

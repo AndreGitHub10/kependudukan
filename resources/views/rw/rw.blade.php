@@ -3,43 +3,43 @@
 <section class="section">
     <div class="card overflow-auto">
         @php($user = \Auth::user())
-      <div class="card-header">
+        <div class="card-header">
         <h4>{{ "Data Penduduk RW $user->rw" }}</h4>
         </div>
         <div class="card-body">
             <table class="table table-striped table-hover" id="table1">
                 <thead>
                     <tr>
-                        <th>NIK</th>
-                        <th>KK</th>
+                        <th>No.</th>
                         <th>Nama</th>
+                        <th>Alamat</th>
                         <th>Tempat Lahir</th>
                         <th>Tanggal Lahir</th>
                         <th>Kontak</th>
                         <th>Rw</th>
                         <th>Rt</th>
-                        <th>Aksi</th>
+                        <!-- <th>Aksi</th> -->
                     </tr>    
                 </thead>
                 <tbody>
                     @foreach ($warga as $wargas)
                     <tr>
-                        <td>{{ $wargas->nik }}</td>
-                        <td>{{ $wargas->kk }}</td>
+                        <td>{{ ++$i }}</td>
                         <td>{{ $wargas->nama }}</td>
+                        <td>{{ $wargas->alamat }}</td>
                         <td>{{ $wargas->tempat_lahir }}</td>
                         <td>{{ $wargas->tanggal_lahir }}</td>
                         <td>{{ $wargas->kontak }}</td>
                         <td>{{ $wargas->rw }}</td>
                         <td>{{ $wargas->rt }}</td>
-                        <td>
+                        <!-- <td>
                             <form method="POST" action="{{ route('warga.destroy', ['warga' => $wargas->id]) }}">
                             @method('DELETE')
                             @csrf
                             
                             <button class="btn btn-primary" type="submit"><i class="fa fa-info-circle"></i>&nbsp;Hapus</button>
                             </form>
-                        </td>
+                        </td> -->
                         <!-- <td>
                             <span class="badge bg-success">Active</span>
                         </td> -->

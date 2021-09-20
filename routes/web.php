@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\RtController;
+use App\Http\Controllers\RwController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -18,26 +19,27 @@ use App\Http\Controllers\UserController;
 Auth::routes();
 Route::get('/', function () {
     return view('form/formguest');
-});
+})->name('welcome');
 
 
 Route::middleware(['admin'])->group(function () {
 	Route::resource('user', UserController::class);
-	Route::get('warga', [RtController::class, 'index'])->name('warga');
-	Route::get('wargarw', [WargaController::class, 'index'])->name('wargarw');
+	Route::resource('warga', WargaController::class);
 });
 
 Route::middleware(['rw'])->group(function () {
-	Route::resource('warga', WargaController::class);
-	Route::get('wargarw', [WargaController::class, 'index'])->name('wargarw');
+	Route::resource('rw', RwController::class);
+	// Route::get('wargarw', [RwController::class, 'index'])->name('wargarw');
 });
 
 Route::middleware(['rt'])->group(function () {
-	Route::resource('warga', WargaController::class);
-	Route::get('warga', [RtController::class, 'index'])->name('warga');
-	Route::get('/create', [WargaController::class, 'create'])->name('create');
-	Route::get('/show', [WargaController::class, 'show'])->name('show');
-	Route::post('/store', [WargaController::class, 'store'])->name('store');
+	Route::resource('rt', RtController::class);
+	// Route::get('rt', [RtController::class, 'index'])->name('rt');
+	// Route::get('/create', [RtController::class, 'create'])->name('create');
+	// Route::get('/show', [RtController::class, 'show'])->name('show');
+	// Route::post('/store', [RtController::class, 'store'])->name('store');
+	// Route::post('/destroy', [RtController::class, 'destroy'])->name('destroy');
+	// Route::post('/update', [RtController::class, 'update'])->name('update');
 });
 
 Route::middleware(['guest'])->group(function () {

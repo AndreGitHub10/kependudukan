@@ -4,7 +4,7 @@
 <section class="section">
     <div class="card overflow-auto">       
         <div class="card-header">
-        <h4>{{ "Login User" }}</h4>
+        <h4>{{ "Data User" }}</h4>
         </div>
         <div class="card-body">
             <a href="{{ route('user.create') }}">
