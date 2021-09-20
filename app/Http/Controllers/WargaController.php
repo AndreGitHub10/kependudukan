@@ -149,17 +149,19 @@ class WargaController extends Controller
         ]);
         // Warga::create($request->all());
         $warga = new Warga;
-        $warga->nik = $request->nik;
-        $warga->kk = $request->kk;
         $warga->nama = $request->nama;
+        $warga->alamat = $request->alamat;
         $warga->tempat_lahir = $request->tempat_lahir;
         $warga->tanggal_lahir = $request->tanggal_lahir;
         $warga->kontak = $request->kontak;
         $warga->rt = $request->rt;
         $warga->rw = $request->rw;
         $warga->save();
-        $request->session()->flash('alert-success', 'User was successful added!');
-        return redirect()->route('welcome');
+        if ($warga->exists) {
+            return redirect()->route('welcome')->with(['success' => 'Data '. $warga->nama .' berhasil ditambahkan']);
+        } else {
+            return redirect()->route('welcome')->with(['danger' => 'Data '. $warga->nama .' gagal ditambahkan']);
+        }
         // return view('form/formguest');
     }
 }
