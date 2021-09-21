@@ -97,11 +97,7 @@
 		                            	<label class="input-group-text" for="rw">RW</label>
 										<select class="form-select" id="rw" name="rw">
 											@if($user->role == 1)
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
 											<option>4</option>
-											<option>5</option>
 											@else
 											<option value="{{$rt}}">{{$rt}}</option>
 											@endif

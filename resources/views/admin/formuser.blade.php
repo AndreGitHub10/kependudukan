@@ -84,11 +84,7 @@
 	                            	<div class="input-group">
 		                            	<label class="input-group-text" for="rw">RW</label>
 										<select class="form-select" id="rw" name="rw">
-											<option value="01">01</option>
-											<option value="02">02</option>
-											<option value="03">03</option>
 											<option value="04">04</option>
-											<option value="05">05</option>
 										</select>
 									</div>
 								</fieldset>
